@@ -1,0 +1,18 @@
+[development]
+key = "development value"
+SQLALCHEMY_DATABASE_URI = "mysql+mysqlconnector://root:V4woDo@localhost/sistema"
+SECRET_KEY="26d1ea5375004b75c01014fd7d035adb304162364a6e326feebdf68e22c3aa25"
+TITLE="e-commerce"
+#FLASK_ADMIN_SWATCH="slate"
+EXTENSIONS=[
+	'my_app.ext.database',
+	'my_app.ext.auth',
+	#'my_app.ext.admin',
+	'my_app.ext.migrate',
+	'my_app.blueprints.webui',
+	'my_app.blueprints.models'
+]
+
+[production]
+key = "production value"
+SQLALCHEMY_DB_URI = "postgresql://..."

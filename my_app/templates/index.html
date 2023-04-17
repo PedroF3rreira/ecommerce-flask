@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block container %}
+	<h1>Ola mundo</h1>
+	{% for user in users %}
+		<p>{{ user.name }} - {{ user.email }}</p>
+	{% endfor %}
+{% endblock %}
