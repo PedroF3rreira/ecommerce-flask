@@ -2,8 +2,10 @@
 {% block content %}
 	<div class="card-body rounded">
 		<table class="table table-bordered table-hover rounded" id="dataTable" width="100%" cellspacing="0">
-			<thead class="bg-primary text-light">
+			<thead>
 				<tr>
+					<th></th>
+					<th></th>
 					{% for column  in columns.values() %}
 						<th scope="col">{{ column }}</th>
 					{% endfor %}
@@ -12,11 +14,11 @@
 			<tbody>
 				{% for item in items %}
 					<tr>
+						<td><a class="fa fa-trash" href="{{ item.id }}"></a></td>
+						<td><a class="fa fa-pen" href="{{ item.id }}"></a></td>	
 						{% for column in columns %}
 							<td>{{ item[column] }}</th>
 						{% endfor %}
-						<td><a class="fa fa-trash" href="{{ item.id }}"></a></td>
-						<td><a class="fa fa-pen" href="{{ item.id }}"></a></td>	
 					</tr>
 				{% endfor %}
 			</tbody>
