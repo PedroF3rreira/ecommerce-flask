@@ -2,6 +2,7 @@ from flask import abort, render_template
 from my_app.blueprints.models.user import User
 from my_app.blueprints.models.provider import Provider
 from my_app.blueprints.models.category import Category
+from my_app.blueprints.models.product import Product
 from my_app.ext.database import db
 
 
@@ -41,3 +42,17 @@ def category():
 		
 	}
 	return render_template('admin/list.html', items=categories, columns=columns)
+
+
+# List Product
+def product():
+	products = Product.query.all()
+	columns = {
+		'id': 'Id',
+		'description': 'Descrição',
+		'long_description': 'Detalhes',
+		'price': 'Preço',
+		'category': 'Categoria'
+		
+	}
+	return render_template('admin/list.html', items=products, columns=columns)

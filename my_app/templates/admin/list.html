@@ -17,7 +17,12 @@
 						<td><a class="fa fa-trash" href="{{ item.id }}"></a></td>
 						<td><a class="fa fa-pen" href="{{ item.id }}"></a></td>	
 						{% for column in columns %}
+							
+							{% if item[column] is float %}
+								<td>{{ "opa" }}</th>
+							{% endif %}
 							<td>{{ item[column] }}</th>
+							
 						{% endfor %}
 					</tr>
 				{% endfor %}

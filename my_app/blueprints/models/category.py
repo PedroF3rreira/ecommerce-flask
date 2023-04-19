@@ -9,3 +9,7 @@ class Category(db.Model, UserMixin):
 	createdat = db.Column(db.DateTime())
 	updatedat = db.Column(db.DateTime())
 	products = db.relationship('Product', backref='category', lazy=True)
+
+
+	def __repr__(self):
+		return self.description

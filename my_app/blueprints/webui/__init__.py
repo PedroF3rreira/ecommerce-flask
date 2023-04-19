@@ -9,7 +9,7 @@ bp.add_url_rule("/admin", view_func=index, )
 bp.add_url_rule("/admin/usuario", view_func=user, )
 bp.add_url_rule("/admin/fornecedor", view_func=provider, )
 bp.add_url_rule("/admin/categoria", view_func=category, )
-
+bp.add_url_rule("/admin/produto", view_func=product, )
 
 
 
