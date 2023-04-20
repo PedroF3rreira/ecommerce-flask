@@ -1,4 +1,5 @@
 {% extends 'admin/base_admin.html' %}
 {% block content %}
-	
+	{% from 'macros/_input.html' import input_field %}
+	{{ input_field(name='user') }}
 {% endblock %}

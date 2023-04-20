@@ -1,6 +1,7 @@
 {% extends 'admin/base_admin.html' %}
 {% block content %}
 	<div class="card-body rounded">
+		<a class="btn btn-primary mb-2" href="#"><i class="fa fa-plus-circle"></i> Cadasrar</a>
 		<table class="table table-bordered table-hover rounded" id="dataTable" width="100%" cellspacing="0">
 			<thead>
 				<tr>
@@ -19,10 +20,10 @@
 						{% for column in columns %}
 							
 							{% if item[column] is float %}
-								<td>{{ "opa" }}</th>
+								<td>{{ "R$ "+item[column] | string | replace('.',',' ) }}</th>
+							{% else %}
+								<td>{{ item[column] }}</th>
 							{% endif %}
-							<td>{{ item[column] }}</th>
-							
 						{% endfor %}
 					</tr>
 				{% endfor %}

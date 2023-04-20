@@ -1,58 +1,22 @@
 from flask import abort, render_template
+from flask.views import View
 from my_app.blueprints.models.user import User
-from my_app.blueprints.models.provider import Provider
-from my_app.blueprints.models.category import Category
-from my_app.blueprints.models.product import Product
 from my_app.ext.database import db
+
+
+# Class de views listagem
+class ViewsList(View):
+	def __init__(self, model, template, columns):
+		self.model = model
+		self.template = template
+		self.columns = columns
+
+
+	def dispatch_request(self):
+		items = self.model.query.all()
+		return render_template(self.template, items=items, columns=self.columns)
 
 
 def index():
 	return render_template('admin/index.html')
 
-# List Users
-def user():
-	users = User.query.all()
-	columns = {
-		'id': 'Id',
-		'name': 'Nome completo',
-		'email': 'Email',
-	}
-	return render_template('admin/list.html', items=users, columns=columns)
-
-# List Providers
-def provider():
-	providers = Provider.query.all()
-	columns = {
-		'id': 'Id',
-		'name': 'Nome fantasia',
-		'corporate_name': 'Razão social',
-		'email': 'Email',
-		'phone': 'Contato',
-	}
-	return render_template('admin/list.html', items=providers, columns=columns)
-
-
-# List Category
-def category():
-	categories = Category.query.all()
-	columns = {
-		'id': 'Id',
-		'description': 'Nome',
-		'long_description': 'Observações',
-		
-	}
-	return render_template('admin/list.html', items=categories, columns=columns)
-
-
-# List Product
-def product():
-	products = Product.query.all()
-	columns = {
-		'id': 'Id',
-		'description': 'Descrição',
-		'long_description': 'Detalhes',
-		'price': 'Preço',
-		'category': 'Categoria'
-		
-	}
-	return render_template('admin/list.html', items=products, columns=columns)
