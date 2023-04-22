@@ -36,6 +36,30 @@ bp.add_url_rule("/admin/fornecedor",
         }
     ))
 
+# ADMIN CREATE PROVIDERS
+bp.add_url_rule("/admin/fornecedor/cadastro", 
+    view_func=ViewsCreate.as_view('create_provider', Provider, 'admin/create.html', 
+    fields={
+        1:{
+            'name': 'name',
+            'label': 'Nome fantasia:',
+            'required': True,
+        },
+        2:{
+            'name': 'corporate_name',
+            'label': 'Razão Social:'
+        },
+        3: {
+            'name': 'email',
+            'type': 'email',
+            'label': 'Email da empresa:'
+        },
+        4:{
+            'name': 'phone',
+            'label': 'Telefone ou Celular:'   
+        }
+    }), methods=('GET', 'POST'))
+
 
 # ADMIN CATEGORIES
 bp.add_url_rule("/admin/categoria", 
@@ -46,6 +70,23 @@ bp.add_url_rule("/admin/categoria",
             'long_description': 'Observações',
         }
     ))
+
+
+# ADMIN CREATE CATEGORIES
+bp.add_url_rule("/admin/categoria/cadastro", 
+    view_func=ViewsCreate.as_view('create_category', Category, 'admin/create.html', 
+    fields={
+        1:{
+            'name': 'description',
+            'label': 'Nome da categoria:',
+            'required': True,
+        },
+        2:{
+            'name': 'long_description',
+            'label': 'Observaçoes da catagoria:',
+            'type': 'text'
+        }
+    }), methods=('GET', 'POST'))
 
 
 
@@ -61,10 +102,26 @@ bp.add_url_rule("/admin/produto",
         }
     ))
 
-def create():
-    return render_template('admin/create.html')
 
-bp.add_url_rule("/admin/create", view_func=create)
+# ADMIN CREATE CATEGORIES
+bp.add_url_rule("/admin/produto/cadastro", 
+    view_func=ViewsCreate.as_view('create_product', Product, 'admin/create.html', 
+    fields={
+        1:{
+            'name': 'description',
+            'label': 'Nome da categoria:',
+            'required': True,
+        },
+        2:{
+            'name': Provider,
+            'label': 'Observaçoes da catagoria:',
+            'type': 'text'
+        }
+    }), methods=('GET', 'POST'))
+
+
+
+
 
 def init_app(app):
     app.register_blueprint(bp)

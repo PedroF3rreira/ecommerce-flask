@@ -1,6 +1,11 @@
-{% macro input_field(name, type='text', value='', placeholder='', label='') -%}
-	<div class="form-group">
-		<label>{{ label }}</label>
-		<input  class="form-control" type="{{ type }}" name="{{ name }}" value="{{ value }}" placeholder="{{ placeholder }}">
+{% macro input_field(name, type='text', value='', placeholder="", label='', class='', required=False) -%}
+	<div class="form-group ">
+		<label class="form-label">{{ label }}</label>
+		<input  class="form-control {{ class }}"  
+			type="{{ type }}" 
+			name="{{ name }}" 
+			value="{{ value }}" 
+			placeholder="{{ placeholder }}" 
+			required={{ required }}>
 	</div>
 {%- endmacro %}

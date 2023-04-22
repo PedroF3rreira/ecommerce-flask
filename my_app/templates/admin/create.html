@@ -1,5 +1,18 @@
 {% extends 'admin/base_admin.html' %}
+{% block sub_title %}
+	<h2 class="display-5"><i class="fa fa-align-right" aria-hidden="true"></i> Cadastro / Clientes</h2>
+{% endblock %}
 {% block content %}
 	{% from 'macros/_input.html' import input_field %}
-	{{ input_field(name='user') }}
+	{% from 'macros/_button.html' import default_button %}
+	<form class="form border rounded col-6 p-2" width='100%' method="post" 
+	action="{{ url_for('webui.create_category') }}">
+
+		{% for field in fields.values() %}
+			{{ input_field(name=field['name'], value="", label=field.label, type=field.type, placeholder=field['placeholder'],  required=field.required)}} 
+		{% endfor %}
+		{{ default_button() }}		
+	
+	</form>
+	
 {% endblock %}

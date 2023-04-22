@@ -9,3 +9,4 @@ class Provider(db.Model, UserMixin):
 	email = db.Column(db.String(100))
 	phone = db.Column(db.String(14))
 	products = db.relationship('Product', backref='product', lazy=True)
+
