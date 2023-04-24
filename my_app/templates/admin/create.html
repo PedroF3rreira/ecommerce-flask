@@ -5,11 +5,16 @@
 {% block content %}
 	{% from 'macros/_input.html' import input_field %}
 	{% from 'macros/_button.html' import default_button %}
+	{% from 'macros/_option.html' import combo %}
 	<form class="form border rounded col-6 p-2" width='100%' method="post" 
 	action="{{ url_for('webui.create_category') }}">
 
 		{% for field in fields.values() %}
-			{{ input_field(name=field['name'], value="", label=field.label, type=field.type, placeholder=field['placeholder'],  required=field.required)}} 
+			{% if field['type'] == 'option' %}
+				{{ combo(name=field['name'], list=items) }}
+			{% else %}
+				{{ input_field(name=field['name'], value="", label=field.label, type=field.type, placeholder=field['placeholder'],  required=field.required)}} 	
+			{% endif %}
 		{% endfor %}
 		{{ default_button() }}		
 	

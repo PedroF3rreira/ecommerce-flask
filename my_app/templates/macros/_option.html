@@ -1,0 +1,9 @@
+{% macro combo(name, list) -%}
+	<div class="form-group">
+		<select name="{{ name }}" class="form-control">
+		{% for item in list %}
+			<option  value="{{ item.id }}">{{ item }}</option>
+		{% endfor %}
+	</select>
+	</div>
+{%- endmacro %}

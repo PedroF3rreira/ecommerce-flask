@@ -19,10 +19,11 @@ class ViewsList(View):
 
 # Class de views cadastro
 class ViewsCreate(View):
-	def __init__(self, model, template, fields):
+	def __init__(self, model, template, fields, items=[]):
 		self.model = model
 		self.template = template
 		self.fields = fields
+		self.items = items
 
 
 	def dispatch_request(self):
@@ -39,14 +40,11 @@ class ViewsCreate(View):
 			return "Cadastro realizado com exito"
 			
 		else:
-			
-			for item in self.fields.values():
-				if type(item['name']) == 'flask_sqlalchemy.model.DefaultMeta':
-					m = item['name']()
-					print(dir(m))
-
-			return render_template(self.template, fields=self.fields)
-
+			if self.items:
+				for item in self.items:
+					intance = item()
+					lista = intance.query.all()
+			return render_template(self.template, fields=self.fields, items=lista)
 
 def index():
 	return render_template('admin/index.html')

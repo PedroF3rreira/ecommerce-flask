@@ -10,3 +10,5 @@ class Provider(db.Model, UserMixin):
 	phone = db.Column(db.String(14))
 	products = db.relationship('Product', backref='product', lazy=True)
 
+	def __repr__(self):
+		return self.name

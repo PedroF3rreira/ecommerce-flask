@@ -1,8 +1,9 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 from my_app.blueprints.models.user import User
 from my_app.blueprints.models.provider import Provider
 from my_app.blueprints.models.category import Category
 from my_app.blueprints.models.product import Product
+from my_app.ext.database import db
 
 from .admin import *
 
@@ -85,7 +86,8 @@ bp.add_url_rule("/admin/categoria/cadastro",
             'name': 'long_description',
             'label': 'Observaçoes da catagoria:',
             'type': 'text'
-        }
+        },
+
     }), methods=('GET', 'POST'))
 
 
@@ -103,25 +105,26 @@ bp.add_url_rule("/admin/produto",
     ))
 
 
-# ADMIN CREATE CATEGORIES
+
+# ADMIN CREATE Produto
 bp.add_url_rule("/admin/produto/cadastro", 
     view_func=ViewsCreate.as_view('create_product', Product, 'admin/create.html', 
     fields={
         1:{
-            'name': 'description',
-            'label': 'Nome da categoria:',
-            'required': True,
+            'name': 'provider_id',
+            'type': 'option',
+            'items': 'provider'
         },
-        2:{
-            'name': Provider,
-            'label': 'Observaçoes da catagoria:',
-            'type': 'text'
-        }
-    }), methods=('GET', 'POST'))
+    }, 
+    items=[Provider]),
+    methods=('GET', 'POST'))
 
 
+# teste
+def teste():
+    return render_template('teste.html', lista=['carro', 'onibus', 'trêm'])
 
-
+bp.add_url_rule('/teste', view_func=teste)
 
 def init_app(app):
     app.register_blueprint(bp)

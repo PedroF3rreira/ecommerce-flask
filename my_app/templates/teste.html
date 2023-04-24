@@ -1,0 +1,6 @@
+{% extends 'admin/base_admin.html' %}
+{% block content %}
+	{% from 'macros/_option.html' import combo %}
+
+	{{ combo('teste', list=lista) }}
+{% endblock %}
