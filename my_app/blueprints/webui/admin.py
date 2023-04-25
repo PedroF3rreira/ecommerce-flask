@@ -19,11 +19,10 @@ class ViewsList(View):
 
 # Class de views cadastro
 class ViewsCreate(View):
-	def __init__(self, model, template, fields, items=[]):
+	def __init__(self, model, template, fields):
 		self.model = model
 		self.template = template
 		self.fields = fields
-		self.items = items
 
 
 	def dispatch_request(self):
@@ -40,11 +39,21 @@ class ViewsCreate(View):
 			return "Cadastro realizado com exito"
 			
 		else:
-			if self.items:
-				for item in self.items:
-					intance = item()
-					lista = intance.query.all()
-			return render_template(self.template, fields=self.fields, items=lista)
+			# if self.items:
+			# 	items = []
+			# 	for item in self.items:
+			# 		instance = item()
+			# 		items.append(instance.query.all()) 
+
+			items = []
+			for field in self.fields.values():
+				if 'model' in field:
+					instance = field['model']()
+					items.append( instance.query.all())
+			
+			for i in items:
+				print(i)
+			return render_template(self.template, fields=self.fields, items=items)
 
 def index():
 	return render_template('admin/index.html')

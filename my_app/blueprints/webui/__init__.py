@@ -113,10 +113,15 @@ bp.add_url_rule("/admin/produto/cadastro",
         1:{
             'name': 'provider_id',
             'type': 'option',
-            'items': 'provider'
+            'model': Provider
         },
-    }, 
-    items=[Provider]),
+        2:{
+            'name': 'category_id',
+            'type': 'option',
+            'model': Category
+        },
+        
+    }),
     methods=('GET', 'POST'))
 
 

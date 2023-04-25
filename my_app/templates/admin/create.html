@@ -11,7 +11,9 @@
 
 		{% for field in fields.values() %}
 			{% if field['type'] == 'option' %}
-				{{ combo(name=field['name'], list=items) }}
+				
+					{{ combo(name=field['name'], list=items) }}
+				
 			{% else %}
 				{{ input_field(name=field['name'], value="", label=field.label, type=field.type, placeholder=field['placeholder'],  required=field.required)}} 	
 			{% endif %}
